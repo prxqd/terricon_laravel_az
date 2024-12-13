@@ -29,8 +29,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'api_key',
-        'role'
     ];
 
     /**
@@ -65,5 +63,9 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public static function getName ($user_id) {
+        return self::find($user_id)->name;
     }
 }

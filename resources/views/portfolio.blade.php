@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Портфолио</title>
+        <title>Портфолио TERRICON</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -60,16 +60,15 @@
 
                     <main class="mt-6">
                         <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
-                           <h1> {{ $title }} </h1>
+                            <h1>{{ $title }}</h1>
 
-                           @foreach($jobs as $job)
+                            @foreach($portfolio as $port)
                                 <div>
-                                    <h2>{{ $job['name'] }} </h2>
-                                    <p>{{ $job['price'] }} {{$job['val'] }}
-                                    </p>
+                                    <h2>{{ $port['name'] }}</h2>
+                                    <p>{{ $port['price' ]}} {{ $port['val'] }}</p>
                                 </div>
                             @endforeach
-                            
+
                         </div>
                     </main>
 

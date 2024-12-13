@@ -3,18 +3,17 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Models\Skill;
-use App\Models\Portfolio;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\SkillController;
-use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\AdminController;
 
-// test
-Route::get('/', function () { return view('welcome'); });
+Route::get('/', [AdminController::class, 'renderWelcomePage'])
+    ->name('welcome');
 
-Route::get('/pages/{name}', function ($name) {
-    return view("pages.$name");
-})->name('pages');
+Route::post('/add-comment', [BlogController::class, 'addComment'])->name('addComment');
+
+Route::get('/pages/{name}', [AdminController::class, 'renderPublicPages'])
+    ->name('pages');
 
 Route::get('/test/{id}', [TestController::class, 'show']);
 
@@ -39,15 +38,6 @@ Route::get('/delete-skill/{id}', [SkillController::class, 'deleteSkill'])
 Route::post('/create-skill', [SkillController::class, 'createSkill'])
     ->middleware('auth')
     ->name('skillCreate.post');
-
-
-
-    // Страница создания портфолио
-Route::get('/create-portfolio', [PortfolioController::class, 'renderCreatePage'])
-->middleware('auth')
-->name('createPortfolio');
-Route::post('/portfolio', [PortfolioController::class, 'createPortfolio'])->middleware('auth')->name('portfolioCreate.post');
-
 
 Route::get('/portfolio', function () {
     $title = 'Портфолио Terricon';
@@ -113,6 +103,9 @@ Route::middleware([
      */
     Route::get('/delete-user/{id}', [AdminController::class, 'deleteUser'])
         ->name('deleteUser');
+
+        Route::get('/delete-comment/{id}', [BlogController::class, 'deleteComment'])->name('deleteComment');
+    Route::post('/edit-comment/{id}', [BlogController::class, 'editComment'])->name('editComment');
 });
 // /ADMIN
 
